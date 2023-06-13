@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${topico.id ne null ? 'Editar':'Nuevo'}]] topico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+</head>
+<body class="container py-3">
+<div class="p-1 bg-light rounded shadow text-center ab-5">
+    <h1 class="text-primary display-4">Bienvenido</h1>
+    <p class="fw-bold mt-3">
+        [[${topico.id ne null ? 'Editar':'Nuevo'}]] topico
+    </p>
+    <hr>
+
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-4  col-md-6">
+        <form name ="topicoForm" th:action ="@{''}" th:object="${topico}" method="post" class="mt-3" novalidate>
+            <div class="mb-2">
+                <label  for="titulo"> titulo</label>
+                <input id="titulo" type="text" placeholder="titulo" th:field="*{titulo}" class="form-control" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-2">
+                <label  for="status"> status</label>
+                <select id="status" th:field="*{status}" class="form-select" aria-label="Default select example">
+
+                    <option th:value="resuelto">
+                        resuelto
+                    </option>
+                    <option th:value="no_resuelto">
+                        no_resuelto
+                    </option>
+                </select>
+                <div th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-2">
+                <label  for="mensaje"> mensaje</label>
+                <input id="mensaje" type="text" placeholder="mensaje" th:field="*{mensaje}" class="form-control" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('mensaje')}" th:errors="*{mensaje}" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-2">
+                <label  for="autor"> autor</label>
+                <input id="autor" type="text" placeholder="autor" th:field="*{autor}" class="form-control" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-2">
+                <label  for="curso"> curso</label>
+                <input id="curso" type="text" placeholder="curso" th:field="*{curso}" class="form-control" th:errorclass="is-invalid">
+                <div th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}" class="invalid-feedback"></div>
+            </div>
+            <div class="mb-2" >
+                <label for="fechaCreacion">Fecha</label>
+                <input id="fechaCreacion" type="date" th:field = "*{fechaCreacion}" th:value="${topico.fechaCreacion }ne null ? ${topico.fechaCreacion }:${fecha}" class="form-control" >
+
+            </div>
+            <div class="mt-3 text-end">
+                <a href="/" class="btn btn-light">Cancelar</a>
+                <button class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>
